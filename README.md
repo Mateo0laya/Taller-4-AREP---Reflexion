@@ -1,8 +1,8 @@
-# TALLER 3: MICROFRAMEWORK WEB
+# TALLER 4 DE ARQUITECTURAS DE SERVIDORES DE APLICACIONES, META PROTOCOLOS DE OBJETOS, PATRÓN IOC, REFLEXIÓN
 
 Este proyecto es una continuación del proyecto anterior el cual se puede encontrar en el siguiente repositorio:
-https://github.com/Mateo0laya/TALLER-2---DISENO-Y-ESTRUCTURACION-DE-APLICACIONES-DISTRIBUIDAS-EN-INTERNET
-Para esta ocasión el objetivo es realizar una pequeña implementación de un framework web tipo spark, el cual soporte las operaciones de GET y POST haciendo uso de las funciones lambda, como se define a continuación
+https://github.com/Mateo0laya/Taller-3-Microframeworks-WEB
+Para esta ocasión el objetivo es desarrollar un prototipo mínimo que demuestre capcidades reflexivas de JAVA y permita por lo menos cargar un bean (POJO) y derivar una aplicación Web a partir de él. 
 
 ## Arquitectura 
 La arquitectura debe tener las siguientes características.
@@ -22,6 +22,7 @@ La arquitectura debe tener las siguientes características.
 13. Entrega archivos estáticos como páginas HTML, CSS, JS e imágenes.
 14. Permite configurar el directorio de donde se leerán los archivos estáticos.
 15. Permite leer parámetros del query  desde los programas.
+16. El framework debe explorar el directorio raiz (o classpath) buscando classes con una anotación que indique que son componentes
 
 ## Diseño de la aplicación
 
@@ -49,6 +50,7 @@ La aplicacipon fue diseñada de tal manera que se cumplan los requisitos estable
 - Por parte de calculator existe una infinidad de posibilidades a la hora de implementar una calculadora usando el método GET, se puede implementar cualquier operación matemática.
 - Crear una visualización adecuada y llamativa para las funcionalidades del framework
 - Existe la opción de cambiar la ruta donde se encuentran los recursos estaticos para lo cual debemos descomentar y editar la linea 19 de Myservices.java
+- Realizar una refactorización del código desacoplando la aplicación.
 
 ## Guia de inicio
 
@@ -65,11 +67,11 @@ Estas instrucciones le permitirán obtener una copia del proyecto en funcionamie
 
 Ubiquese en el directorio en donde desea descargar el repositorio
 
-`git clone https://github.com/Mateo0laya/Taller-3-Microframeworks-WEB.git`
+`git clone https://github.com/Mateo0laya/Taller-4-AREP---Reflexion.git`
 
 Cambie al directorio del repositorio
 
-`cd Taller-3-Microframeworks-WEB.git`
+`cd Taller-4-AREP---Reflexion`
 
 Compile el proyecto
 
@@ -81,7 +83,7 @@ Empaquete el proyecto
 
 Inicie el servidor
 
-`java -cp target\appps-distribuidas-1.0-SNAPSHOT.jar edu.escuelaing.AREP.Taller1.HttpServer`
+`java -cp target/classes edu.escuelaing.AREP.Taller1.Controller.MyServices`
 
 Una alternativa a la linea de comandos es realizar la ejecución desde un IDE. En este caso Visual Studio Code desde la clase MyServices.java
 ![image](https://github.com/Mateo0laya/Taller-3-Microframeworks-WEB/assets/89365336/861bb52c-adf7-4374-a748-344d51b30b8d)
@@ -155,6 +157,28 @@ Allí encontraremos un formulario para añadir nuestras ideas, se enviará y pro
 ### Linux
 
 Usando una maquina virtual de Ubuntu podemos ver que igualmente corre la aplicación
+
+### Respuesta usando anotaciones
+
+Hemos definido en la clase HelloController.java tres posibles respuestas diferentes, como se solicitó en los requisitos las respuestas se limitan a Strings:
+- /hello:
+  Acceda a la siguiente dirección: http://localhost:35000/components/hello
+  
+  ![image](https://github.com/Mateo0laya/Taller-4-AREP---Reflexion/assets/89365336/e99e8077-5e06-45f7-ab00-59bd654b791e)
+
+- /bye:
+  Acceda a la siguiente dirección: http://localhost:35000/components/bye
+
+  ![image](https://github.com/Mateo0laya/Taller-4-AREP---Reflexion/assets/89365336/a09c9496-4af8-4baf-a948-83d367e9b5ff)
+
+- /name:
+  Acceda a la siguiente dirección, en esta ocasión es necesario enviar un query con su nombre:http://localhost:35000/components/name?a=[Nombre]
+
+  ![image](https://github.com/Mateo0laya/Taller-4-AREP---Reflexion/assets/89365336/3b14e151-0177-42b0-981f-e8c58e2e07a2)
+
+- En caso de solicitar una respuesta que no existe en el componente HelloController.java recibiremos un mensaje de error:
+
+  ![image](https://github.com/Mateo0laya/Taller-4-AREP---Reflexion/assets/89365336/d5b51fd2-46c7-430b-af8d-87e97f72fe08)
 
 
 ## Pruebas unitarias
