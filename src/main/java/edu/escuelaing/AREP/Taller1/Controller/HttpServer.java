@@ -133,17 +133,20 @@ public class HttpServer {
     private static String responseComponent(URI requestUri) throws IllegalAccessException, InvocationTargetException {
         String output = "";
         String path = requestUri.getPath().substring(11);
-        String query = requestUri.getQuery().split("=")[1];
+        String query = requestUri.getQuery();
         System.out.println(path);
 
         Method m = components.get(path);
 
         if (components.containsKey(path)) {
             if (query != null) {
+                query = query.split("=")[1];
                 output = m.invoke(null, query).toString();
             } else {
                 output = m.invoke(null).toString();
             }
+        } else {
+            return httpError();
         }
         return "HTTP/1.1 200 OK\r\n"
                 + "Content-Type:text/html\r\n"
